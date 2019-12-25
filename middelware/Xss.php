@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use App\Http\Controllers\Controller;
-use App\User;
 use Closure;
 use Exception;
 use Illuminate\Support\Facades\Validator;
