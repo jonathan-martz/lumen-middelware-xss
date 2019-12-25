@@ -31,12 +31,20 @@ class Xss extends Controller
         return $next($request);
     }
 
+    /**
+     * @param string $input
+     * @throws Exception
+     */
     public function checkString(string $input){
         if (strlen($input) !== strlen(strip_tags($input))) {
             throw new Exception('Request contains xss attack');
         }
     }
 
+    /**
+     * @param array $input
+     * @throws Exception
+     */
     public function checkArray(array $input){
         if(is_string($input)){
             $this->checkString($input);
@@ -48,6 +56,10 @@ class Xss extends Controller
         }
     }
 
+    /**
+     * @param $input
+     * @throws Exception
+     */
     public function check($input){
         if(is_string($input)){
             $this->checkString($input);
