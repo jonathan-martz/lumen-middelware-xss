@@ -25,12 +25,36 @@ class Xss extends Controller
     public function handle($request, Closure $next, $guard = null)
     {
         foreach ($this->request->all() as $key => $input) {
-            if (strlen($input) !== strlen(strip_tags($input))) {
-                throw new Exception('Request contains xss attack');
-            }
+            $this->check($input);
         }
 
         return $next($request);
+    }
+
+    public function checkString(string $input){
+        if (strlen($input) !== strlen(strip_tags($input))) {
+            throw new Exception('Request contains xss attack');
+        }
+    }
+
+    public function checkArray(array $input){
+        if(is_string($input)){
+            $this->checkString($input);
+        }
+        else if(is_array($input)){
+            foreach($input as $key => $item){
+                $this->check($item);
+            }
+        }
+    }
+
+    public function check($input){
+        if(is_string($input)){
+            $this->checkString($input);
+        }
+        else if(is_array($input)){
+            $this->checkArray($input);
+        }
     }
 
 }
