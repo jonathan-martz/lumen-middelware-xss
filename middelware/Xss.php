@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Closure;
 use Exception;
-use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -21,11 +20,18 @@ class Xss extends Controller
      * @param $request
      * @param Closure $next
      * @param null $guard
+     * @return mixed
      * @throws Exception
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        throw new Exception();
+        foreach ($this->request->all() as $key => $input) {
+            if (strlen($input) !== strlen(strip_tags($input))) {
+                throw new Exception('Request contains xss attack');
+            }
+        }
+
+        return $next($request);
     }
 
 }
