@@ -4,7 +4,7 @@
     "description":"Php Lumen Middelware Xss",
     "require":{
         "php": "^7.3|^7.4",
-        "laravel/lumen-framework": "^6.3",
+        "laravel/lumen-framework": "^7.0",
         "jonathan-martz/lumen-controller": "^0.3"
     },
     "autoload": {
