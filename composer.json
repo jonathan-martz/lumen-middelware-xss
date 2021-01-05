@@ -4,7 +4,7 @@
     "description":"Php Lumen Middelware Xss",
     "require":{
         "php": "^7.3|^7.4",
-        "illuminate/support": "^7.3",
+        "illuminate/support": "^8.21",
         "jonathan-martz/lumen-controller": "dev-master"
     },
     "autoload": {
